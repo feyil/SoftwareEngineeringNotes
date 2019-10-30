@@ -458,7 +458,7 @@ public class Factory {
 
 #### Types of **Dependency Injection**
 
-**Constructor Injection:** In the constructor injection, the injector supplies the service(depenency) through the client class constructor.
+**Constructor Injection:** In the constructor injection, the injector supplies the service(dependency) through the client class constructor.
 
 ```java
 public class CustomerBusinessLogic {
