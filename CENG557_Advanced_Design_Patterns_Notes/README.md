@@ -350,6 +350,7 @@ Understanding Responsibilities is key to good OO Design.
 * Don't apply OCP at first
 * If the module changes once, accept it.
 * If it changes a second time, refactor to achieve OCP
+* A principle which states that we should add new functionality by adding new code, not by editing old code.
 
 #### Liskov Substitution Principle(LSP)
 
@@ -369,3 +370,212 @@ Understanding Responsibilities is key to good OO Design.
 * High level modules should not depend upon low level modules. Both should depend upon **abstractions**.
 * Abstractions should not depend upon details. Details should depend upon abstractions.
 * Dependency Injection
+* Avoid deriving from concrete classes
+* Avoid associating to concrete classes
+* Avoid aggregating concrete classes
+* Avoid dependencies on concrete components
+* Well designed object oriented architectures should have clearly defined layers. Each layer should:
+    * Provide some coherent set of services
+    * Provide those services through a well defined interface
+* Abstractions in programming means to create an interface or an abstract class which is non-concrete.
+
+#### Inversion of Control, Dependency Inversion Principle, Dependency Injection, IoC Containers
+
+* Principle
+    * Inversion of Control(IoC)
+    * Depedency Inversion Principle(DIP)
+* Pattern
+    * Depedency Injection(DI)
+* Framework
+    * IoC Container
+
+* IoC is a desing principle which recommends the inversion of different kinds of controls in object-oriented design to achieve loose coupling between application classes.
+* Depedency Injection(DI) is a design pattern which implements the IoC principle to invert the creation of dependent objects.
+* The IoC container is a framework used to manage automatic depedency injection throughout the application, so that we as programmers do not need to put more time and effort into it.
+* To achieve loosely coupled classes
+    1. Tightly Coupled Classes
+    2. Implement IoC using Factory Patern
+    3. Implement DIP by creating abstraction
+    4. Implement DI
+    5. Use IoC Container
+    6. Loosely Coupled Classes
+* The IoC principle suggests to invert the control, meaning that instead of driving the car yourself, you hire a cab, where another person will drive the car. Thus, this called inversion of the control.
+
+```java
+public class A {
+    B b;
+
+    public A() {
+        b = new B();
+    }
+
+    public void task1() {
+        b.someMethod();
+    }
+}
+
+public class B {
+
+    public void someMethod() {
+        //doing something
+    }
+}
+```
+with inversion of contol(IoC):
+```java
+public class A {
+    B b;
+
+    public A() {
+        b = Factory.getObjectOfB();
+    }
+
+    public void task1() {
+        b.someMethod();
+    }
+}
+
+public class Factory {
+
+    public static B getObjectOfB() {
+        return new B();
+    }
+}
+```
+
+* The IoC principle suggest to invert the control.
+* This means to delegate the control to another class.
+* In other words, invert the dependency creation control from class A to another class, as shown below.
+    * Principle
+        * Inversion of Control
+            * Patterns
+                * Service Locator
+                * Factory
+                * Abstract Factory
+                * Template Method
+                * Strategy
+                * Depdency Injection
+
+#### Types of **Dependency Injection**
+
+**Constructor Injection:** In the constructor injection, the injector supplies the service(depenency) through the client class constructor.
+
+```java
+public class CustomerBusinessLogic {
+    ICustomerDataAccess _dataAccess;
+
+    public CustomerBusinessLogic(ICustomerDataAccess custDataAccess) {
+        _dataAccess = custDataAccess;
+    }
+
+    public CustomerBusinessLogic() {
+        _dataAccess = new CustomerDataAccess();
+    }
+
+    public String ProcessCustomerData(int id) {
+        return _dataAccess.GetCustomerName(id);
+    }
+}
+
+public interface ICustomerDataAccess {
+    String GetCustomerData(int id);
+}
+
+public class CustomerDataAccess: ICustometDataAccess {
+
+    public CustomerDataAccess() {
+
+    }
+
+    public String GetCustomerName(int id) {
+        return "Dummy Customer Name";
+    }
+}
+
+public class CustomerService {
+    CustomerBusinessLogic _customerBL;
+
+    public CustomerService() {
+        _customerBL = new CustomerBusinessLogic(new CustomerDataAccess());
+    }
+
+    public String GetCustomerName(int id) {
+        return _customerBL.GetCustomerName(id);
+    }
+}
+```
+
+**Propery Injection:** In the propery injection(aka the Setter Injection) the injector supplies the dependency through a public property of the client class.
+
+```java
+public class CustomerBusinessLogic {
+
+    public CustomerBusinessLogic() {
+
+    }
+
+    public String GetCustomerName(int id) {
+        return DataAccess.GetCustomerName(id);
+    }
+
+    public ICustomerDataAccess DataAccess { get; set;}
+}
+
+public class CustomerService {
+    CustomerBusinessLogic _customerBL;
+
+    public CustomerService() {
+        _customerBL = new CustomerBusinessLogic();
+        _customerBL.DataAccess = new CustomerDataAccess();
+    }
+
+    public String GetCustomerName(int id) {
+        return _customerBL.GetCustomerName(id);
+    }
+}
+```
+
+**Method Injection:** In this type of injection, the client class implements an interface which declares the method(s) to supply the dependency and the injector uses this interface to supply the dependency to the client class.
+
+```C#
+public interface IDataAccessDependency {
+    void SetDependency(ICustomerDataAccess customerDataAccess);
+}
+
+public class CustomerBusinessLogic:IDataAccessDependency {
+    ICustomerDataAccess _dataAccess;
+
+    public CustomerBusinessLogic() {
+
+    }
+
+    public String GetCustomerName(int id) {
+        return _dataAccess.GetCustomerName(id);
+    }
+
+    public void SetDependency(ICustomerDataAccess customerDataAccess) {
+        _dataAccess = customerDataAccess;
+    }
+}
+
+public class CustomerService {
+    CustomerBusinessLogic _customerBL;
+
+    public CustomerService() {
+        _customerBL = new CustomerBusinessLogic();
+        ((IDataAccessDependency)_customerBL).SetDependency(new CustomerDataAccess());
+    }
+
+    public String GetCustomerName(int id) {
+        return _customerBL.GetCustomerName(id);
+    }
+}
+```
+
+* IoC Container(aka DI Container) is a framework for implementing automatic dependency injection.
+* It manages object creation and it's life-time, and also injects dependencies to the class.
+* The IoC container creates an object of the specified class and also injects all the dependency objects through a constructor, a property or a method at run time and disposes it at the appropriate time.
+* Classes shouldn't have implicit, hidden dependencies
+    * DateTime.Now
+    * Logger
+    * SmtpClient
