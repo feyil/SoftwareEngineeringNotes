@@ -334,18 +334,30 @@ Understanding Responsibilities is key to good OO Design.
 * SOLID was introduced by Robert C. Martin in the an article called the "Principles of Object Oriented Design" in the early 2000s.
 
 #### Single Responsibility Principle(SRP)
-
+* The Single Responsibility Principle states that every object should have a single responsibility, and that responsibility should be entirely encapsulated by the class.
 * There should never be more than one reason for a class to change.
+* More responsibility == More likelihood of change
+* What is a Responsibility?
+    * **a reason to change**
 
 #### Open/Closed Principle(OCP)
 
 * Software entities(classes, modules, functions, etc.) should be open for extension but closed for modification.
 * Method parameters shoudl be interfaces not specific classes
+* Writing new classes is less likely to introduce problems
+    * Nothing depends on new classes (yet)
+    * New classes have no legacy coupling to make them hard to design or test.
+* Don't apply OCP at first
+* If the module changes once, accept it.
+* If it changes a second time, refactor to achieve OCP
 
 #### Liskov Substitution Principle(LSP)
 
 * Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.
 * Avoid Run-Time Type Information(RTTI)
+* The Liskov Substitution Principle states that Subtypes must be substitutable for their base types.
+* In general must not require calling code to know they are different from their base type.
+* LSP suggest that IS-A should be replaced with IS-SUBSTITUTABLE-FOR.
 
 #### Interface Segregation Principle(ISP)
 
