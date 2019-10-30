@@ -208,3 +208,18 @@ class Player {
     }
 }
 ```
+
+### GRASP Patterns
+
+**G**eneral **R**esponsibility **A**ssignment **S**oftware **P**atterns
+
+* Information Expert
+* Creator
+* High Cohession
+* Low Coupling
+* Controller
+
+"The critical design tool for software development is a mind well educated in design principles. It is not the UML or any other technology." Larman, Craig
+
+**GRASP is a learning aid**
+
