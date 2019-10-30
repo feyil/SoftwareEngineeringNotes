@@ -211,17 +211,32 @@ class Player {
 
 ### GRASP Patterns
 
-**G**eneral **R**esponsibility **A**ssignment **S**oftware **P**atterns
+* **G**eneral **R**esponsibility **A**ssignment **S**oftware **P**atterns
 
 * Information Expert
 * Creator
 * High Cohession
 * Low Coupling
 * Controller
+* Polymorphism
+* Pure Fabrication
+* Indirection
+* Protected Variations
 
-"The critical design tool for software development is a mind well educated in design principles. It is not the UML or any other technology." Larman, Craig
+* "The critical design tool for software development is a mind well educated in design principles. It is not the UML or any other technology." Larman, Craig
 
-**GRASP is a learning aid**
+* **GRASP is a learning aid**
+* Classes need to be implemented(and ideally, fully unit tested) from least-coupled to most-coupled.
+Understanding Responsibilities is key to good OO Design.
+* Two types of responsibilities
+    * Doing
+        * Doing something itself(e.g. creating an object doing a calculation)
+        * Intiating action in other objects
+        * Controlling and coordinating activities in other objects
+    * Knowing
+        * Knowing about private encapsulated data
+        * Knowing about related objects
+        * Knowing about things it can derive or calculate
 
 #### Information Expert
 
@@ -235,6 +250,11 @@ class Player {
     * It is an inventory of objects of that type.
 * Refer to the creational design patterns:
     * Factory, Builder, Prototype & Singleton
+* Assign class B the responsibility to create an instance of class A if one of these is true
+    * B "contains" or compositely aggregates A.
+    * B records A.
+    * B closely uses A.
+    * B has the intializing data for A that will be passed to A when it is created. Thus B is an Expert with respect to creating A.
 
 #### High Cohesion
 
@@ -242,13 +262,25 @@ class Player {
 * High cohesion promotes:
     * Ease of understanding & maintenance
     * Encapsulation
-    * Log coupling
+    * Low coupling
 * Separate Concerns
+* Low cohesion class
+    * does many unrelated things or too much work.
+    * represent a very "large grain" of abstraction or have taken on responsibilities that should have been delegated to other objects.
+    * hard to comprehend reuse, maintain, delicate; constantly affected by change
+* In practice, the level of cohesion alone can't be considered in isolation from other responsibilities and other principles such as Expert and Low Coupling.
 
 #### Low Coupling
 
 * Coupling is a measure of how strongly one class has knowledge of, or relies upon other classes.
 * Low coupling is encouraged by using **interfaces**, and the maximum degree of **encapsulation**.
+* In practice, the level of coupling alone can't be considered in isolation from other principles such as Expert and High Cohesion.
+* In object-oriented languages such as C++, Java, and C#, common forms of coupling from TypeX to TypeY include:
+    * TypeX has an attribute(data memmber or instance variable) that refers to a TypeY instance, or TypeY itself.
+    * A TypeX object calls on services of a TypeY object.
+    * TypeX has a method that references an instance of TypeY, or TypeY itself, by any means. These typically include a parameter or local variable of type TypeY, or the object returned from a message being an instance of TypeY.
+    * TypeX is a direct or indirect subclass of TypeY.
+    * TypeY is an interface, and TypeX implements that interface.
 
 #### Controller
 
@@ -256,6 +288,35 @@ class Player {
 * Mediator: Encapsulate the interaction(s) between a set of classes.
 * Façade: Provide a single interface to an architectural layer or component the Façade class **control** the other classes that make up the sub-system.
 * MVC(Model-View-Controller)
+* Use the same controller clas for all system events in the same use case scenario.
+* **Guideline:** a controller should delegate to other objects the work that needs to be done; it coordinates or controls he activity. It does not do mush work itself.
+* **Use case controllers**.
+* **Pure Fabrication:** This GRASP pattern is an arbitrary creation of the designer, not a software class whose name is inspired by the Domain Model. A use case controller is a kind of Pure Fabrication.
+* Controller = delegation pattern, delegate real work to real objects.
 
+#### Polymorphism
 
+* When related alternatives or behaviours vary by type(class), assign responsibility for the behavior -using polymorphic operation- to the types for which the behavior varies.
 
+#### Pure Fabrication Pattern
+
+* What object should have the responsibility, when you do not want to violate High Cohesion and Low Coupling, or other goals, but solutions offered by Expert(for example) are not appropriate?
+
+* Assign a cohesive set of responsibilities to an artifical or convenience class that does not represent a problem domain concept but is purely imaginary and fabricated to obtain a pure design with high cohesion and low coupling.
+
+* **Remember:** the software is not designed to simulate the domain, but operate in it.
+
+#### Indirection Pattern
+
+* Assign the responsibility to an intermediate object to mediate between other components or services so that they are not directly coupled.
+
+#### Protected Variations Pattern
+
+* Identify points of predicted variation or instability; assign responsibilities to create a stable interface around them.
+* There are packages that allow applications to access databases in a DB-independent way.
+
+### Command-Query Separation Principle
+
+* Every method should be:
+    * A command method that performs an action, often has side effects such as changing the state of objects, and is void
+    * A query that returns data to the caller and has no side effects.
