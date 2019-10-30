@@ -327,4 +327,33 @@ Understanding Responsibilities is key to good OO Design.
     * **Essential complexities*** - complexities that are inherent in the problem.
     * **Accidental/incidental complexities** - complexities that are artifacts of the solution
 * The total amount of complexity in a software solution is:
-    Essential Complexities + Accidental complexities
+    * Essential Complexities + Accidental complexities
+
+### The S.O.L.I.D Principles of Software Development
+
+* SOLID was introduced by Robert C. Martin in the an article called the "Principles of Object Oriented Design" in the early 2000s.
+
+#### Single Responsibility Principle(SRP)
+
+* There should never be more than one reason for a class to change.
+
+#### Open/Closed Principle(OCP)
+
+* Software entities(classes, modules, functions, etc.) should be open for extension but closed for modification.
+* Method parameters shoudl be interfaces not specific classes
+
+#### Liskov Substitution Principle(LSP)
+
+* Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.
+* Avoid Run-Time Type Information(RTTI)
+
+#### Interface Segregation Principle(ISP)
+
+* Many client specific interfaces are better than one general purpose interface.
+* Clients should not be forced to depend upon interfaces that they do not use.
+
+#### Dependency Inversion Principle
+
+* High level modules should not depend upon low level modules. Both should depend upon **abstractions**.
+* Abstractions should not depend upon details. Details should depend upon abstractions.
+* Dependency Injection
