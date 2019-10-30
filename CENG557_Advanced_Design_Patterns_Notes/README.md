@@ -223,3 +223,39 @@ class Player {
 
 **GRASP is a learning aid**
 
+#### Information Expert
+
+* **Assign a responsibility** to the class that has the information necessary to fulfill it. "Partial experts" collaborate.
+
+#### Creator
+
+* Consider making a class **responsible** for creating an object if:
+    * It has the information needed to initialize the object
+    * It will be the primary of objects of that type
+    * It is an inventory of objects of that type.
+* Refer to the creational design patterns:
+    * Factory, Builder, Prototype & Singleton
+
+#### High Cohesion
+
+* Cohesion is a measure of the degree to which a class **responsibilities** are semantically related.
+* High cohesion promotes:
+    * Ease of understanding & maintenance
+    * Encapsulation
+    * Log coupling
+* Separate Concerns
+
+#### Log Coupling
+
+* Coupling is a measure of how strongly one class has knowledge of, or relies upon other classes.
+* Low coupling is encouraged by using **interfaces**, and the maximum degree of **encapsulation**.
+
+#### Controller
+
+* Object have **responsibilities** which can include controlling and sequencing.
+* Mediator: Encapsulate the interaction(s) between a set of classes.
+* Façade: Provide a single interface to an architectural layer or component the Façade class **control** the other classes that make up the sub-system.
+* MVC(Model-View-Controller)
+
+
+
