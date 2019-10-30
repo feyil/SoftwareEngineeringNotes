@@ -245,7 +245,7 @@ class Player {
     * Log coupling
 * Separate Concerns
 
-#### Log Coupling
+#### Low Coupling
 
 * Coupling is a measure of how strongly one class has knowledge of, or relies upon other classes.
 * Low coupling is encouraged by using **interfaces**, and the maximum degree of **encapsulation**.
