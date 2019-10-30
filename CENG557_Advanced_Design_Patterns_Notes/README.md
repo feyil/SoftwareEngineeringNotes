@@ -320,3 +320,11 @@ Understanding Responsibilities is key to good OO Design.
 * Every method should be:
     * A command method that performs an action, often has side effects such as changing the state of objects, and is void
     * A query that returns data to the caller and has no side effects.
+
+### Two Types of Complexity in Software
+
+* To better understand how good design can minimize technical complexity, it's helpful to distinguish between two major types of complexity in software
+    * **Essential complexities*** - complexities that are inherent in the problem.
+    * **Accidental/incidental complexities** - complexities that are artifacts of the solution
+* The total amount of complexity in a software solution is:
+    Essential Complexities + Accidental complexities
