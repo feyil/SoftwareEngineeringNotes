@@ -1,6 +1,6 @@
 # CENG557 Advanced Design Patterns
 
-    I participated this course without offical enrollement and this readme.md file the place where I will take some notes related with this course.
+I participated this course without offical enrollement and this readme.md file the place where I will take some notes related with this course.
 
 ## Course Topics
 * GRASP patterns
@@ -15,7 +15,8 @@
 
 ### Design Principles
 
-    Design principles in this course and used by the design patterns
+Introductory Design Principles
+
 * Use abstraction whenever possible
     * introduce(abstract) superclass (or interface) in order to implement or define common behavior
     * nothing should be implemented twice
@@ -162,7 +163,7 @@ public class Mouse extends Vegetarian implements Food {
 #### Association vs Aggregation vs Composition vs Dependency
 
 **Aggregation** and **Composition** are subsets of association meaning they are **specific cases of association**. In both aggregation and composition object of one class "owns" object of another class. But there is a subtle difference:
-    * **Aggregation** implies a relationship where the child can exist independently of the parent. Example: Class(Parent) and Student(Child). Delete the Class and the studnets still exist.
+* **Aggregation** implies a relationship where the child can exist independently of the parent. Example: Class(Parent) and Student(Child). Delete the Class and the studnets still exist.
 
 ```java
 class Asset { 
@@ -178,7 +179,7 @@ class Player {
 }
 ```
 
-    * **Composition** implies a relationship where the child cannot exist independent of the parent. Example: House(parent) and Room(child) Rooms don't exist separate to a House.
+* **Composition** implies a relationship where the child cannot exist independent of the parent. Example: House(parent) and Room(child) Rooms don't exist separate to a House.
 
 ```java
 public class Piece {
@@ -194,7 +195,7 @@ public class Player {
 }
 ```
 
-**Dependency** is a weaker form of relationship and in code terms indicates that a class uses another by parameter or return type.
+* **Dependency** is a weaker form of relationship and in code terms indicates that a class uses another by parameter or return type.
 
 ```java
 class Die {
